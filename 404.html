@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css" />
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <title>Reading v1</title>
+</head>
+
+<body>
+<center style="margin-top: 200px;">
+<h1 style="font-size: 100px;">404</h1>
+<p id="hitokoto">
+  <span id="hitokoto_text">加载中.......</span>
+</p>
+<button>返回首页</button><br><br><br><br><br><br><br>
+</center>
+<p>Copyright ©️2024 Eric Lee & Turbo Flint. All Rights Reserved.</p>
+<p>Random Poetry API：<a href="https://hitokoto.cn">hitokoto</a></p>
+</body>
+<script>
+fetch('https://v1.hitokoto.cn?c=i')
+  .then(response => response.json())
+  .then(data => {
+    const hitokoto = document.querySelector('#hitokoto_text')
+    hitokoto.href = `https://hitokoto.cn/?uuid=${data.uuid}`
+    hitokoto.innerText = data.hitokoto
+  })
+  .catch(console.error)
+</script>
+</html>

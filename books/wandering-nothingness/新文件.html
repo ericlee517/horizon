@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    p {
+      line-height: 150em; /* 段落之间的行高 */
+    }
+
+    p span {
+      line-height: 0.1em; /* 段落内的行高 */
+    }
+  </style>
+</head>
+
+<body>
+  <div id="output"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/5.0.0/marked.min.js"></script>
+  <script>
+    const markdownContent = `
+    测试
+
+    你好坚定的开始了都看不到好大会大家都觉得看哦都觉得
+    是搜嘎等哈继续继续可喜欢想回
+    学校呼吸机小鸡小鸡登记登记超级小
+
+    你好吗？`;
+
+    const html = marked.parse(markdownContent);
+
+    // 直接在生成的 HTML 字符串中添加 span 标签
+    const processedHtml = html.replace(/<p>(.*?)<\/p>/g, '<p><span>$1</span></p>');
+
+    document.getElementById('output').innerHTML = processedHtml;
+  </script>
+</body>
+
+</html>

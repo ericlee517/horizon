@@ -1,0 +1,22 @@
+[{
+        "book_name": "流浪虚无",
+        "book_writer": "BroKen",
+        "book_id": "tr_wn_20240630",
+        "book_number": "5万字",
+        "book_chapter": "10",
+        "book_time": "2024年6月30日",
+        "book_ending_time": "2025年1月1日",
+        "book_link": "../books/wandering-nothingness"
+    },
+
+    {
+        "book_name": "测试数据",
+        "book_writer": "BroKen",
+        "book_id": "tr_test_00000000",
+        "book_number": "test",
+        "book_chapter": "test",
+        "book_time": "test",
+        "book_ending_time": "test",
+        "book_link": "../test"
+    }
+]

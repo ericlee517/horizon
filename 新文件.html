@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/@picocss/pico/css/pico.min.css">
+</head>
+
+<body>
+
+  <button id="settingsButton">设置</button>
+
+  <script>
+    const settingsButton = document.getElementById('settingsButton');
+
+    settingsButton.addEventListener('click', () => {
+      const modal = document.createElement('div');
+      modal.classList.add('modal');
+
+      const modalContent = document.createElement('div');
+      modalContent.classList.add('modal-content');
+
+      const fontEnlargeOption = document.createElement('label');
+      fontEnlargeOption.innerHTML = '<input type="radio" name="fontOption" value="enlarge">放大字体';
+
+      const fontShrinkOption = document.createElement('label');
+      fontShrinkOption.innerHTML = '<input type="radio" name="fontOption" value="shrink">缩小字体';
+
+      const fullscreenOption = document.createElement('label');
+      fullscreenOption.innerHTML = '<input type="radio" name="fontOption" value="fullscreen">全屏阅读';
+
+      modalContent.appendChild(fontEnlargeOption);
+      modalContent.appendChild(fontShrinkOption);
+      modalContent.appendChild(fullscreenOption);
+
+      modal.appendChild(modalContent);
+
+      document.body.appendChild(modal);
+
+      const radioButtons = document.querySelectorAll('input[name="fontOption"]');
+
+      radioButtons.forEach(button => {
+        button.addEventListener('change', (e) => {
+          const selectedValue = e.target.value;
+          localStorage.setItem('fontSetting', selectedValue);
+
+          modal.remove();
+        });
+      });
+    });
+
+    // 在页面加载时检查存储的设置并应用
+    const savedSetting = localStorage.getItem('fontSetting');
+    if (savedSetting) {
+      if (savedSetting === 'enlarge') {
+        document.body.style.fontSize = '16px';
+      } else if (savedSetting ==='shrink') {
+        document.body.style.fontSize = '12px';
+      } else if (savedSetting === 'fullscreen') {
+        if (document.fullscreenElement) {
+          document.exitFullscreen();
+        } else {
+          document.documentElement.requestFullscreen();
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>

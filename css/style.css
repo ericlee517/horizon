@@ -1,0 +1,60 @@
+body
+{
+    padding: 15px 15px 15px 15px;
+}
+
+.top-30{
+    margin-top: 30px;
+}
+
+tag{
+    line-height: 30px;
+}
+
+.tag-green{
+    background: var(--pico-color-green-500);
+    color: white;
+    padding-left: 0.4em;
+    padding-right: 0.1em;
+    padding-top: 0.1em;
+    padding-bottom: 0.1em;
+}
+
+.tag-blue{
+    background: var(--pico-color-azure-600);
+    color: white;
+    padding-left: 0.2em;
+    padding-right: 0.2em;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+}
+
+.tag-pink{
+    background: var(--pico-color-red-400);
+    color: white;
+    padding-left: 0.2em;
+    padding-right: 0.2em;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+}
+
+.user-image-control{
+    width: 105px;
+    height: 0;
+    padding-bottom: 105px;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.user-image{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+.user-text{
+    line-height: 1px;
+}
