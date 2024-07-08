@@ -3,68 +3,83 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" /> 
-<meta http-equiv="Pragma" content="no-cache" /> 
-<meta http-equiv="Expires" content="0" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="n o-cache" />
+    <meta http-equiv="Expires" content="0" />
     <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="favicon.svg">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css" />
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css" type="text/css">
     <title>Horizon 里森 - 享受阅读</title>
 </head>
 
 <body>
-<!-- Nav 导航栏 -->
+    <!-- Nav 导航栏 -->
     <nav>
-        <ul>
+        <ul class="first-li">
             <li><a href="#">首页</a></li>
             <li><a href="#">分类</a></li>
             <li><a href="setting/index.html">设置</a></li>
         </ul>
     </nav>
     <br>
-    <div class="user-info">
-        <div class="user-image-control">
-            <img src="image/default_avatar.jpg" class="user-image" id="avatar">
-            <br><br>
-        </div>
-        <div class="user-text">
-            <h1><span id="name">Reader</span></h1>
-            <p><b style="color: red;">适配原因，该功能随时可能会被下架</b></p>
-        </div>
+    <center>
+        <img src="image/pen.jpg" class="circle_image"><br><br>
+        <h1>欢迎使用 Horizon</h1>
+        <p>即刻享受阅读带来的乐趣。</p>
+    </center>
+    <br>
+
+    <hr>
+    <br>
+    <h1>热门作者</h1>
+    <div class="overflow-scroll">
+            <div class="artist">
+                <img src="image/flower.jpg" class="artist_image">
+                <h4>Turbo Flint</h4>
+            </div>
+            <div class="artist">
+                <img src="image/dog.jpg" class="artist_image">
+                <h4>光晕新鲜</h4>
+            </div>
     </div>
     <br>
-    <br>
-    <h1 class="top-30">所有作品</h1>
-<!-- 渲染作品信息Temple -->
+    <hr>
+    <h1 class="top-30">热门作品</h1>
+    <!-- 渲染作品信息Temple -->
     <div id="app"></div>
+    <br>
+    <hr>
+    <h1>想要投稿？</h1>
+    <p>别担心！Horizon 已经正在尝试开放创作者功能。未来将支持创作者自行投稿，Horizon 将会有更多优质的作品！</p>
 
     <script src="https://unpkg.com/vue@3.4.31/dist/vue.global.js"></script>
-<script>
-  Vue.createApp({
-    data() {
-      return {
-        booksData: []
-      };
-    },
-    mounted() {
-      fetch('../json/books.json')
-      .then(response => response.json())
-      .then(data => {
-          this.booksData = data;
-          this.renderBooks();
-        })
-      .catch(error => {
-          console.error('获取数据出错:', error);
-        });
-    },
-    methods: {
-      renderBooks() {
-        this.booksData.forEach(book => {
-          const article = document.createElement('article');
-          article.innerHTML = `
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    booksData: []
+                };
+            },
+            mounted() {
+                fetch('../json/books.json')
+                    .then(response => response.json())
+                    .then(data => {
+                        this.booksData = data;
+                        this.renderBooks();
+                    })
+                    .catch(error => {
+                        console.error('获取数据出错:', error);
+                    });
+            },
+            methods: {
+                renderBooks() {
+                    this.booksData.forEach(book => {
+                        const article = document.createElement('article');
+                        article.innerHTML = `
             <h1>${book.book_name}</h1>
             <p>发布时间：${book.book_time}</p>
             <hr>
@@ -74,12 +89,12 @@
             <hr>
             <a href="${book.book_link}/?chapter=chapter-1" role="button">立即阅读</a>
           `;
-          document.getElementById('app').appendChild(article);
-        });
-      }
-    }
-  }).mount('#app');
-</script>
+                        document.getElementById('app').appendChild(article);
+                    });
+                }
+            }
+        }).mount('#app');
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="js/script.js"></script>
 

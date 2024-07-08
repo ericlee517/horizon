@@ -54,20 +54,4 @@ window.addEventListener('load', () => {
     if (yourname) {
         document.getElementById('name').innerHTML = yourname;
     }
-
-    if (avatar) {
-        avatarImg.src = avatar;  // 设置 img 的 src 属性
-    }
 });
-
-function addTimestampToImgSrc(imgSrc) {
-  const timestamp = new Date().getTime();
-  return imgSrc + '?timestamp=' + timestamp.toString();
-}
-
-// 获取图片元素
-const avatar = document.getElementById('avatar'); 
-// 获取原始的图片链接
-const originalAvatarSrc = avatar.src; 
-// 设置添加时间戳后的图片链接
-avatar.src = addTimestampToImgSrc(originalAvatarSrc);
