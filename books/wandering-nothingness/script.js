@@ -127,17 +127,10 @@ window.addEventListener('DOMContentLoaded', () => {
     };
 
     const fontSize = getLocalStorageValue('font-size', 16);
-    const marginTop = getLocalStorageValue('margin-top', 120);
-    const pMarginTop = getLocalStorageValue('p-margin-top', 120);
 
     const Article = document.getElementById('article');
     Article.style.fontSize = fontSize + 'px';
-    Article.style.marginTop = marginTop + 'px';
 
-    const pTags = document.getElementsByTagName('p');
-    for (let i = 0; i < pTags.length; i++) {
-        pTags[i].style.marginTop = pMarginTop + 'px';
-    }
 });
 // 使用 fetch 获取 JSON 数据
 fetch('list.json ')

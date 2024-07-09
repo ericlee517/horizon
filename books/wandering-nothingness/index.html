@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        #output > p {
+            margin-top: 50px;
+        }
+    </style>
     <title>您正在阅读 流浪虚无 - Horizon 里森</title>
 </head>
 
@@ -20,18 +25,18 @@
         </ul>
     </nav>
     <br>
-<details class="dropdown">
-                    <summary role="button" class="outline">查看目录</summary>
-                    <ul id="list">
-                    </ul>
-                </details>
+    <details class="dropdown">
+        <summary role="button" class="outline">查看目录</summary>
+        <ul id="list">
+        </ul>
+    </details>
     <div id="article">
-        <div id="output"><span aria-busy="true">正在加载内容......</span></div>
+        <div id="output">p<span aria-busy="true">正在加载内容......</span></div>
+       <br>
     </div><br>
     <p>©️ 2024 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nd.svg?ref=chooser-v1" alt=""></a></p>
-<br>
-<hr>
-<br>
+    <hr>
+    <br>
     <article>
         上一章：<span id="prev_chapter"></span>
     </article>
@@ -41,21 +46,23 @@
     </article>
     <br>
 
-<p>Copyright ©️ 2024 Eric Lee & Turbo Flint. All Rights Reserved.</p>
-<p><a href="https://help.turboflint.cn">版权说明</a></p>
+    <p>Copyright ©️ 2024 Eric Lee & Turbo Flint. All Rights Reserved.</p>
+    <p><a href="https://help.turboflint.cn">版权说明</a></p>
     <script>
-const renderer = new marked.Renderer();
-const paragraphParse = (text) => `<p>${text}</p>`; 
-renderer.paragraph = paragraphParse; 
-marked.setOptions({ renderer });
-</script>
+        const renderer = new marked.Renderer();
+        const paragraphParse = (text) => `<p>${text}</p>`;
+        renderer.paragraph = paragraphParse;
+        marked.setOptions({
+            renderer
+        });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="script.js"></script>
-<script src="https://unpkg.com/vconsole@latest/dist/vconsole.min.js"></script>
-<script>
-  // VConsole 默认会挂载到 `window.VConsole` 上
-  var vConsole = new window.VConsole();
-</script>
+    <script src="https://unpkg.com/vconsole@latest/dist/vconsole.min.js"></script>
+    <script>
+        // VConsole 默认会挂载到 `window.VConsole` 上
+        var vConsole = new window.VConsole();
+    </script>
 </body>
 
 </html>
