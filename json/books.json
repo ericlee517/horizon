@@ -1,12 +1,15 @@
 [{
         "book_name": "流浪虚无",
         "book_writer": "BroKen",
-        "book_id": "tr_wn_20240630",
-        "book_number": "5万字",
+        "book_id": "broken_nathan20240630",
+        "book_category": "BroKen",
         "book_chapter": "10",
-        "book_time": "2024年6月30日",
-        "book_ending_time": "2025年1月1日",
-        "book_link": "../books/wandering-nothingness"
+        "book_time": "2024 年 6 月 30 日",
+        "book_link": "../books/wandering-nothingness",
+        "chapter-list": {
+            "chapter-1": "前因 流浪的时候",
+            "chapter-2": "第一章 漂泊"
+        }
     },
 
     {

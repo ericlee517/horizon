@@ -1,7 +1,80 @@
-#article {
-  font-size: 1.3em;
+.body{
+    margin: 15px;
 }
 
-p{
-  margin-top: 150px;
+@media (prefers-color-scheme: dark) {
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background: rgb(13,16,23);
+    position: fixed;
+    top: 0;
+    padding: 15px;
+    color: black;
+    left: -250px;
+    transition: left 0.3s cubic-bezier(0.65, 0.05, 0.36, 1);
+    z-index: 2;
+  }
+
+}
+
+@media (prefers-color-scheme: light) {
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background: white !important;
+    position: fixed;
+    top: 0;
+    padding: 15px;
+    color: black;
+    left: -250px;
+    transition: left 0.3s cubic-bezier(0.65, 0.05, 0.36, 1);
+    z-index: 2;
+   }
+}
+
+.sidebar.open {
+    left: 0;
+}
+
+ .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0);
+    display: none;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.overlay.show {
+    background-color: rgba(0, 0, 0, 0.5);
+    display: block;
+    pointer-events: all;
+}
+
+ul{
+    padding: 0;
+    margin: 0;
+}
+
+ul li{
+    list-style: none;
+    cursor: pointer;
+}
+
+li{
+    margin-top: 5px;
+    padding: 6px;
+    font-size: 18px;
+}
+
+nav{
+    margin: 10px;
+}
+
+body{
+    margin-top: 0;
 }

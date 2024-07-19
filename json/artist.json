@@ -1,0 +1,28 @@
+[{
+        "name": "Turbo Flint",
+        "avatar_url":"",
+        "joy_time": "2024年9月29日",
+        "introduce": "一起在里森，创作作品。",
+        "public_trust": "true",
+        "type": "official"
+
+    },
+
+    {
+        "name": "Horizon 里森",
+        "avatar_url":"",
+        "joy_time": "2024年9月29日",
+        "introduce": "Hi, 我是里森，一起在Horizon进行创作吧！",
+        "public_trust": "true",
+        "type": "official"
+    },
+
+    {
+        "name": "光晕心弦",
+        "avatar_url":"",
+        "joy_time": "2024年9月29日",
+        "introduce": "一名里森的普通创作者。",
+        "public_trust": "false",
+        "type": "normal_author"
+    }
+]

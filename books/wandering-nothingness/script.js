@@ -1,4 +1,57 @@
-/* 参数相关 */
+/* book_id 验证和目录相关 */
+const app = Vue.createApp({
+    data() {
+        return {
+            currentBook: null,
+            books: []
+        };
+    },
+    created() {
+        fetch('../../json/books.json')
+          .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP 错误！状态: ${response.status}`);
+                }
+                return response.json();
+            })
+          .then(data => {
+                this.books = data;
+
+                const currentUrl = window.location.href;
+                const params = new URLSearchParams(currentUrl.split('?')[1]);
+                const bookId = params.get('id');
+
+                if (bookId) { 
+                    for (const book of this.books) {
+                        if (book.book_id === bookId) {
+                            this.currentBook = book;
+                            // 保存到 localStorage
+                            localStorage.setItem('currentBook', JSON.stringify(book));
+                            break;
+                        }
+                    }
+                } else {
+                    console.warn('warning: The id parameter is empty, and the directory information cannot be obtained.');
+                }
+            })
+          .catch(error => {
+                console.error('error: ', error);
+            });
+    },
+    mounted() {
+        // 在页面挂载时尝试从 localStorage 恢复数据
+        const savedCurrentBook = JSON.parse(localStorage.getItem('currentBook'));
+        if (savedCurrentBook) {
+            this.currentBook = savedCurrentBook;
+        }
+    }
+});
+
+app.mount('#app');
+
+
+
+/* URL参数相关 */
 
 
 // 获取当前查询参数中的 chapter 值
@@ -14,6 +67,8 @@ function getPrevChapter(current) {
         return null;
     }
 }
+
+/* 章节处理相关 */
 
 function getNextChapter(current) {
     let num = parseInt(current.split('-')[1]);
@@ -132,19 +187,19 @@ window.addEventListener('DOMContentLoaded', () => {
     Article.style.fontSize = fontSize + 'px';
 
 });
-// 使用 fetch 获取 JSON 数据
-fetch('list.json ')
-    .then(response => response.json())
-    .then(data => {
-        const chapterList = document.getElementById('list');
 
-        for (const key in data) {
-            if (data.hasOwnProperty(key)) {
-                const chapterName = data[key];
-                const li = document.createElement('li');
-                li.innerHTML = `<a href="?chapter=${key}">${chapterName}</a>`;
-                chapterList.appendChild(li);
-            }
-        }
-    })
-    .catch(error => console.error('获取数据时出错:', error));
+// 获取当前页面的 URL 对象
+var currentUrl = new URL(window.location.href);
+
+// 定义需要检查的参数名和指定的值
+var parameterName = 'chapter';
+var specifiedValue = 'chapter-1';
+
+// 检查参数是否存在
+if (!currentUrl.searchParams.has(parameterName)) {
+    // 构建带有指定参数的新 URL
+    var newUrl = currentUrl.origin + currentUrl.pathname + '?' + parameterName + '=' + specifiedValue;
+    // 跳转到新的 URL
+    window.location.href = newUrl;
+    console.log('参数存在');
+}
