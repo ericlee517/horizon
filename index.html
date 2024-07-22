@@ -7,8 +7,8 @@
     <meta http-equiv="Pragma" content="n o-cache" />
     <meta http-equiv="Expires" content="0" />
     <meta name="msvalidate.01" content="F098810C23C307FD2628AC73EB86D58C" />
-    <meta name=”keywords” content="阅读平台|阅读|读书|小说|小说平台|免费小说|无广告小说|里森|Horizon|Horizon里森|破碎|Broken|BroKen|第二者|流浪虚无|看小说|免费小说|小众小说平台">
-    <meta name=”description” content="免费、无广告的阅读平台。无论你在哪，随时随地，都能阅读。支持下载TXT、EPUB等格式离线阅读，不再受局限，想你所做。">
+    <meta name="keywords" content="阅读平台|阅读|读书|小说|小说平台|免费小说|无广告小说|里森|Horizon|Horizon里森|破碎|Broken|BroKen|第二者|流浪虚无|看小说|免费小说|小众小说平台">
+    <meta name="description" content="免费、无广告的阅读平台。无论你在哪，随时随地，都能阅读。支持下载TXT、EPUB等格式离线阅读，不再受局限，想你所做。">
     <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="favicon.svg">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
@@ -26,8 +26,8 @@
   </ul>
         <ul class="first-li">
             <li><a href="#">首页</a></li>
-            <li><a href="category">分类</a></li>
-            <li><a href="search">搜索</a></li>
+            <li><a href="#">分类</a></li>
+            <li><a href="#">搜索</a></li>
             <li><a href="setting">设置</a></li>
             <li><i class="bi bi-brightness-high-fill" style="font-size: 20px;"></i></li>
         </ul>
@@ -37,7 +37,7 @@
     <br>
     <center>
 <div class="pattern-dots-lg">
-        <img src="image/pen.jpg" class="circle_image"><br><br>
+        <img src="image/pen.jpg" alt="horizon_image" class="circle_image"><br><br>
         <h1>欢迎使用 Horizon</h1>
         <p>即刻享受阅读带来的乐趣。</p>
 </div>
@@ -45,8 +45,7 @@
     <br>
 
     <hr>
-    <br>
-    <h1>热门作者</h1>
+    <h2>热门作者</h2>
     <div class="flex-container">
             <div class="flex-item">
                 <img src="image/flower.jpg" class="artist_image">
@@ -56,7 +55,7 @@
     </div>
     <br>
     <hr>
-    <h1 class="top-30">热门作品</h1>
+    <h2 class="top-30">热门作品</h2>
     <div id="app">
     <article v-for="book in books" :key="book.book_id">
       <h1>{{ book.book_name }}</h1>
@@ -70,7 +69,7 @@
   </div>
     <br>
     <hr>
-    <h1>想要投稿？</h1>
+    <h2>想要投稿？</h2>
     <p>别担心！Horizon 已经正在尝试开放创作者功能。未来将支持创作者自行投稿，Horizon 将会有更多优质的作品！</p>
 
   <script src="https://cdn.staticfile.net/vue/3.3.4/vue.global.min.js"></script>
