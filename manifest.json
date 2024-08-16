@@ -11,7 +11,7 @@
   "theme_color": "#ffffff",
   "icons": [
     {
-      "src": "application/favicon.jpg",
+      "src": "application/favicon.png",
       "type": "image/jpg"
     }
   ],

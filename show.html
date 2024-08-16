@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>书架展示</title>
+  <script src="https://unpkg.com/vue@3"></script>
+</head>
+
+<body>
+  <div id="app">
+    <h2>书架</h2>
+    <div v-if="bookshelfIds.length === 0">
+      当前书架没有作品，添加作品后会在这里显示。
+    </div>
+    <div v-for="bookId in bookshelfIds" :key="bookId">
+      <h3>{{ getBookName(bookId) }}</h3>
+      <a :href="`books/${getBookLink(bookId)}/read/?id=${bookId}&chapter=chapter-1`" role="button">立即阅读</a>
+    </div>
+  </div>
+
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          books: [],
+          bookshelfIds: []
+        };
+      },
+      created() {
+        fetch('../../../json/books.json')
+         .then(response => {
+            if (!response.ok) {
+              throw new Error(`HTTP 错误！状态: ${response.status}`);
+            }
+            return response.json();
+          })
+         .then(data => {
+            this.books = data;
+
+            const bookshelf = document.cookie.split('; ').find(row => row.startsWith('bookshelf='));
+            if (bookshelf) {
+              this.bookshelfIds = bookshelf.split('=')[1].split(',');
+            }
+          })
+         .catch(error => {
+            console.error('error: ', error);
+          });
+      },
+      methods: {
+        getBookName(bookId) {
+          const book = this.books.find(book => book.id === bookId);
+          return book? book.name : '未找到作品';
+        },
+        getBookLink(bookId) {
+          const book = this.books.find(book => book.id === bookId);
+          return book? book.book_link : '';
+        }
+      }
+    });
+
+    app.mount('#app');
+  </script>
+</body>
+
+</html>
