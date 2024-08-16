@@ -1,4 +1,48 @@
-/* 参数相关 */
+/* book_id 验证和目录相关 */
+const app = Vue.createApp({
+    data() {
+        return {
+            currentBook: null,
+            books: []
+        };
+    },
+    created() {
+        fetch('../../../json/books.json')
+          .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP 错误！状态: ${response.status}`);
+                }
+                return response.json();
+            })
+          .then(data => {
+                this.books = data;
+
+                const currentUrl = window.location.href;
+                const params = new URLSearchParams(currentUrl.split('?')[1]);
+                const bookId = params.get('id');
+
+                if (bookId) {
+                    for (const book of this.books) {
+                        if (book.id === bookId) {
+                            this.currentBook = book;
+                            break;
+                        }
+                    }
+                } else {
+                    console.warn('warning: The id parameter is empty, and the directory information cannot be obtained.');
+                }
+            })
+          .catch(error => {
+                console.error('error: ', error);
+            });
+    }
+});
+
+app.mount('#app');
+
+
+
+/* URL参数相关 */
 
 
 // 获取当前查询参数中的 chapter 值
@@ -15,6 +59,8 @@ function getPrevChapter(current) {
     }
 }
 
+/* 章节处理相关 */
+
 function getNextChapter(current) {
     let num = parseInt(current.split('-')[1]);
     let next = `chapter-${num + 1}`;
@@ -28,7 +74,6 @@ function getNextChapter(current) {
             }
         });
 }
-
 // 初始获取并显示当前章节内容
 if (currentChapter) {
     fetch(currentChapter + '.md')
@@ -40,15 +85,16 @@ if (currentChapter) {
         })
         .then(markdownContent => {
             // 使用 marked 解析 Markdown 为 HTML
-            // 将内容输出到控制台，作为测试使用
             var tokens = marked.lexer(markdownContent);
             const html = marked.parse(markdownContent);
             document.getElementById('output').innerHTML = html;
         })
         .catch(error => {
             // 文件未找到时的处理
-            document.getElementById('output').innerHTML = '<p><b>[Error] </b>Cannot find the chapter <b>' + currentChapter + '</b></p>';
+            document.getElementById('output').innerHTML = '<p><b>错误：</b>找不到章节<b>「' + currentChapter + '」</b>，请检查网络或章节是否存在。</p>';
         });
+
+
 
     // 获取并显示下一章信息
     getNextChapter(currentChapter).then(next => {
@@ -71,7 +117,7 @@ if (currentChapter) {
                             break;
                         }
                     }
-                    const link = `<a href="?chapter=${next}">${firstTitle}</a>`;
+                    const link = `<a href="?chapter=${next}&id=h-01">${firstTitle}</a>`;
                     document.getElementById('next_chapter').innerHTML = link;
                 })
                 .catch(error => {
@@ -103,7 +149,7 @@ if (currentChapter) {
                         break;
                     }
                 }
-                const link = `<a href="?chapter=${prev}">${firstTitle}</a>`;
+                const link = `<a href="?chapter=${prev}&id=h-01">${firstTitle}</a>`;
                 document.getElementById('prev_chapter').innerHTML = link;
             })
             .catch(error => {
@@ -126,32 +172,25 @@ window.addEventListener('DOMContentLoaded', () => {
         return defaultValue;
     };
 
-    const fontSize = getLocalStorageValue('font-size', 16);
-    const marginTop = getLocalStorageValue('margin-top', 120);
-    const pMarginTop = getLocalStorageValue('p-margin-top', 120);
+    const fontSize = getLocalStorageValue('font-size', 20);
 
     const Article = document.getElementById('article');
     Article.style.fontSize = fontSize + 'px';
-    Article.style.marginTop = marginTop + 'px';
 
-    const pTags = document.getElementsByTagName('p');
-    for (let i = 0; i < pTags.length; i++) {
-        pTags[i].style.marginTop = pMarginTop + 'px';
-    }
 });
-// 使用 fetch 获取 JSON 数据
-fetch('list.json ')
-    .then(response => response.json())
-    .then(data => {
-        const chapterList = document.getElementById('list');
 
-        for (const key in data) {
-            if (data.hasOwnProperty(key)) {
-                const chapterName = data[key];
-                const li = document.createElement('li');
-                li.innerHTML = `<a href="?chapter=${key}">${chapterName}</a>`;
-                chapterList.appendChild(li);
-            }
-        }
-    })
-    .catch(error => console.error('获取数据时出错:', error));
+// 获取当前页面的 URL 对象
+var currentUrl = new URL(window.location.href);
+
+// 定义需要检查的参数名和指定的值
+var parameterName = 'chapter';
+var specifiedValue = 'chapter-1';
+
+// 检查参数是否存在
+if (!currentUrl.searchParams.has(parameterName)) {
+    // 构建带有指定参数的新 URL
+    var newUrl = currentUrl.origin + currentUrl.pathname + '?id=h-01&' + parameterName + '=' + specifiedValue;
+    // 跳转到新的 URL
+    window.location.href = newUrl;
+    console.log('参数存在');
+}

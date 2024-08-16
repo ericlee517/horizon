@@ -9,9 +9,30 @@
 
             try {
                 localStorage.setItem('font-size', selectedFontSize);
-                alert('设置已保存！');
+                Toastify({
+                    text: "已保存设置！",
+                    duration: 3000,
+                    newWindow: true,
+                    gravity: "top", // `top` or `bottom`
+                    position: "center", // `left`, `center` or `right`
+                    stopOnFocus: true, // Prevents dismissing of toast on hover
+                    style: {
+                        background: "rgb(39,117,182)",
+                    }
+                }).showToast();
             } catch (error) {
-                console.error('保存设置时出错:', error);
+               console.error(error);
+               Toastify({
+                    text: "保存失败，请尝试刷新本页面。",
+                    duration: 3000,
+                    newWindow: true,
+                    gravity: "top", // `top` or `bottom`
+                    position: "center", // `left`, `center` or `right`
+                    stopOnFocus: true, // Prevents dismissing of toast on hover
+                    style: {
+                        background: "rgb(240,75,34)",
+                    }
+                }).showToast();
             }
         });
 
@@ -24,7 +45,20 @@
                     fontSizeSelect.value = savedFontSize;
                 }
             } catch (error) {
-                console.error('读取存储设置时出错:', error);
+                console.error(error);
+                Toastify({
+                    text: "载入数据时出错。",
+                    duration: 3000,
+                    newWindow: true,
+                    gravity: "top", // `top` or `bottom`
+                    position: "center", // `left`, `center` or `right`
+                    stopOnFocus: true, // Prevents dismissing of toast on hover
+                    style: {
+                        background: "rgb(240,75,34)",
+                    }
+                }).showToast();
+                
+        
             }
         });
 
@@ -33,9 +67,29 @@
             try {
                 // 这里假设只删除特定的设置键
                 localStorage.removeItem('font-size');
-                alert('已恢复默认设置！');
-                location.reload();
+                Toastify({
+                    text: "已恢复默认设置！",
+                    duration: 3000,
+                    newWindow: true,
+                    gravity: "top", // `top` or `bottom`
+                    position: "center", // `left`, `center` or `right`
+                    stopOnFocus: true, // Prevents dismissing of toast on hover
+                    style: {
+                        background: "rgb(39,117,182)",
+                    }
+                }).showToast();
             } catch (error) {
-                console.error('恢复默认设置时出错:', error);
+                console.error(error);
+                Toastify({
+                    text: "恢复默认设置时出错。",
+                    duration: 3000,
+                    newWindow: true,
+                    gravity: "top", // `top` or `bottom`
+                    position: "center", // `left`, `center` or `right`
+                    stopOnFocus: true, // Prevents dismissing of toast on hover
+                    style: {
+                        background: "rgb(240,75,34)",
+                    }
+                }).showToast();
             }
         });

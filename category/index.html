@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="n o-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="../favicon.svg">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css" />
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <title>分类 - Horizon 里森</title>
+</head>
+
+<body>
+    <!-- Nav 导航栏 -->
+    <nav>
+        <ul>
+            <li><img src="../favicon.svg" width="35"></li>
+        </ul>
+        <ul class="first-li">
+            <li><a href="../">首页</a></li>
+            <li><a href="#">分类</a></li>
+            <li><a href="../search">搜索</a></li>
+            <li><a href="../setting">设置</a></li>
+            <li><i class="bi bi-brightness-high-fill" style="font-size: 20px;"></i></li>
+        </ul>
+    </nav>
+    <br>
+    <div id="app">
+    <hgroup>
+        <h1>分类</h1>
+<p>点击分类即可展出分类下的所有内容。</p>
+</hgroup>
+        <div>
+            <a v-for="category in uniqueCategories" :key="category" :href="`?type=${category}`">{{ category }}</a>
+        </div>
+        <br>
+
+        <div v-if="selectedCategory">
+            <article v-for="book in filteredBooks" :key="book.book_id">
+                <h3>{{ book.book_name }}</h3>
+                <p>分类：{{ selectedCategory }}</p>
+                <p>作者：{{ book.book_writer }}</p>
+                <a :href="`../books/${book.book_link}/?chapter=chapter-1&id=${book.book_id}`">立即阅读</a>
+            </article>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.staticfile.net/vue/3.3.4/vue.global.min.js"></script>
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    books: [],
+                    selectedCategory: null,
+                    uniqueCategories: []
+                };
+            },
+            async mounted() {
+                try {
+                    const response = await fetch('../json/books.json');
+                    if (response.ok) {
+                        const data = await response.json();
+                        this.books = data;
+
+                        // 使用 Set 去除重复的分类
+                        const categorySet = new Set(data.map(book => book.book_category));
+                        this.uniqueCategories = Array.from(categorySet);
+                    } else {
+                        console.error('无法获取数据');
+                    }
+
+                    // 处理 URL 参数
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const categoryParam = urlParams.get('type');
+                    if (categoryParam) {
+                        this.selectedCategory = categoryParam;
+                    }
+                } catch (error) {
+                    console.error('获取数据时出错', error);
+                }
+            },
+            computed: {
+                filteredBooks() {
+                    if (this.selectedCategory) {
+                        return this.books.filter(book => book.book_category === this.selectedCategory);
+                    }
+                    return [];
+                }
+            }
+        });
+
+        app.mount('#app');
+    </script>
+</body>
+
+</html>

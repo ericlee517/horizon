@@ -4,11 +4,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/theme-toggles@latest/css/expand.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://fastly.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <title>设置 - Horizon</title>
+    <style>
+        .theme-toggle.theme-toggle--reversed .theme-toggle__expand {
+            transform: scale(-1, 1)
+        }
+
+        .theme-toggle {
+            --theme-toggle__expand--duration: 500ms
+        }
+
+        .theme-toggle__expand g circle,
+        .theme-toggle__expand g path {
+            transform-origin: center;
+            transition: transform calc(var(--theme-toggle__expand--duration) * .65) cubic-bezier(0, 0, 0, 1.25) calc(var(--theme-toggle__expand--duration) * .35)
+        }
+
+        .theme-toggle__expand :first-child path {
+            transition-property: transform, d;
+            transition-duration: calc(var(--theme-toggle__expand--duration) * .6);
+            transition-timing-function: cubic-bezier(0, 0, 0.5, 1)
+        }
+
+        .theme-toggle input[type=checkbox]:checked~.theme-toggle__expand g circle,
+        .theme-toggle--toggled:not(label).theme-toggle .theme-toggle__expand g circle {
+            transform: scale(1.4);
+            transition-delay: 0s
+        }
+
+        .theme-toggle input[type=checkbox]:checked~.theme-toggle__expand g path,
+        .theme-toggle--toggled:not(label).theme-toggle .theme-toggle__expand g path {
+            transform: scale(.75);
+            transition-delay: 0s
+        }
+
+        .theme-toggle input[type=checkbox]:checked~.theme-toggle__expand :first-child path,
+        .theme-toggle--toggled:not(label).theme-toggle .theme-toggle__expand :first-child path {
+            d: path("M-9 3h25a1 1 0 0017 13v30H0Z");
+            transition-delay: calc(var(--theme-toggle__expand--duration) * 0.4);
+            transition-timing-function: cubic-bezier(0, 0, 0, 1.25)
+        }
+
+        @supports not (d:path("")) {
+
+            .theme-toggle input[type=checkbox]:checked~.theme-toggle__expand :first-child path,
+            .theme-toggle--toggled:not(label).theme-toggle .theme-toggle__expand :first-child path {
+                transform: translate3d(-9px, 14px, 0)
+            }
+        }
+
+        .theme-toggle {
+            border: none;
+            background: 0 0;
+            cursor: pointer
+        }
+
+        .theme-toggle input[type=checkbox] {
+            display: none
+        }
+
+        .theme-toggle .theme-toggle-sr {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0
+        }
+
+        @media (prefers-reduced-motion:reduce) {
+            .theme-toggle:not(.theme-toggle--force-motion) * {
+                transition: none !important
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -20,8 +98,10 @@
     <h1 style="font-size: 40px;">设置 <i class="bi bi-gear-fill"></i></h1>
     <p>设置阅读页面以及个人信息。</p>
     <hr>
-    <h3>字号</h3>
-    <p>自定义阅读界面字号大小</p>
+    <hgroup>
+        <h3>字号</h3>
+        <p>自定义阅读界面字号大小</p>
+    </hgroup>
     <select name="select" id="font-size" aria-label="Select" required>
         <option disabled value="">选择......</option>
         <option value="12px">12px</option>
@@ -30,9 +110,44 @@
         <option value="24px">24px</option>
     </select>
 
+    <hgroup>
+        <h3>主题</h3>
+        <p>设置全局主题颜色</p>
+    </hgroup>
+    <form id="theme-switcher-form">
+        <select>
+            <option value="">跟随系统</option>
+            <option value="light" id="light-theme" name="theme-choice">浅色模式</option>
+            <option value="dark" id="dark-theme" name="theme-choice">深色模式</option>
+        </select>
+
+
+        <button class="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme">
+            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em" fill="currentColor" class="theme-toggle__around" viewBox="0 0 32 32">
+                <clipPath id="theme-toggle__around__cutout">
+                    <path d="M0 0h42v30a1 1 0 00-16 13H0Z" />
+                </clipPath>
+                <g clip-path="url(#theme-toggle__around__cutout)">
+                    <circle cx="16" cy="16" r="8.4" />
+                    <g>
+                        <circle cx="16" cy="3.3" r="2.3" />
+                        <circle cx="27" cy="9.7" r="2.3" />
+                        <circle cx="27" cy="22.3" r="2.3" />
+                        <circle cx="16" cy="28.7" r="2.3" />
+                        <circle cx="5" cy="22.3" r="2.3" />
+                        <circle cx="5" cy="9.7" r="2.3" />
+                    </g>
+                </g>
+            </svg>
+        </button>
+        <br><br>
+
+
+    </form>
     <button id="clear" class="secondary">恢复默认设置</button>
     <button id="saved">保存设置</button>
     <script src="script.js"></script>
+    <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/toastify-js"></script>
 </body>
 
 </html>

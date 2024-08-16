@@ -10,69 +10,114 @@
     <meta name="keywords" content="阅读平台|阅读|读书|小说|小说平台|免费小说|无广告小说|里森|Horizon|Horizon里森|破碎|Broken|BroKen|第二者|流浪虚无|看小说|免费小说|小众小说平台">
     <meta name="description" content="免费、无广告的阅读平台。无论你在哪，随时随地，都能阅读。支持下载TXT、EPUB等格式离线阅读，不再受局限，想你所做。">
     <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="favicon.svg">
+   <link rel="manifest" href="manifest.json">
+   <link rel="icon" type="image/png" href="favicon.svg">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css" />
     <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+
+    <style>
+        .last-visited {
+            display: none;
+        }
+
+        .last-visited.show {
+            display: block;
+        }
+    </style>
     <title>Horizon 里森 - 享受阅读</title>
 </head>
 
 <body>
     <!-- Nav 导航栏 -->
     <nav>
-    <ul>
-    <li><img src="favicon.svg" width="35"></li>
-  </ul>
+        <ul>
+            <li><img src="favicon.svg" width="35"></li>
+        </ul>
         <ul class="first-li">
             <li><a href="#">首页</a></li>
-            <li><a href="#">分类</a></li>
-            <li><a href="#">搜索</a></li>
-            <li><a href="setting">设置</a></li>
-            <li><i class="bi bi-brightness-high-fill" style="font-size: 20px;"></i></li>
+            <li><a href="search">搜索</a></li>
+            <li><a href="category">分类</a></li>
+            <li>
+                <details class="dropdown">
+                    <summary>
+                        更多
+                    </summary>
+                    <ul dir="rtl">
+
+                        <li><a href="#"><i class="bi bi-bookmark-plus"></i> 书架</a></li>
+                        <li><a href="#"><i class="bi bi-people"></i> 社区</a></li>
+                        <li><a href="setting/index.html"><i class="bi bi-gear-wide-connected"></i> 设置</a></li>
+                    </ul>
+                </details>
+            </li>
         </ul>
     </nav>
-<br>
-    <article>下载Horizon Android App，享受更极致的阅读体验。<a href="https://static.turboflint.cn/apk/horizon_101.apk">立即下载</a></article>
+    <br>
+    <article>将里森添加到桌面，下次阅读更加便捷。<br><a id="install">我该如何添加？</a></article>
     <br>
     <center>
-<div class="pattern-dots-lg">
-        <img src="image/pen.jpg" alt="horizon_image" class="circle_image"><br><br>
-        <h1>欢迎使用 Horizon</h1>
-        <p>即刻享受阅读带来的乐趣。</p>
-</div>
+        <div class="pattern-dots-lg">
+            <img src="image/pen.jpg" alt="horizon_image" class="circle_image"><br><br>
+            <h1>欢迎使用 Horizon</h1>
+            <p>即刻享受阅读带来的乐趣。</p>
+        </div>
     </center>
     <br>
 
     <hr>
+    <hgroup>
+        <h2>书架(测试中)</h2>
+        <p>添加作品至书架，会在这里显示。</p><br>
+        <article>
+            <h3>流浪虚无</h3>
+            <a>立即阅读</a>
+        </article>
+    </hgroup>
+    <br>
+    <hr>
     <h2>热门作者</h2>
     <div class="flex-container">
-            <div class="flex-item">
-                <img src="image/flower.jpg" class="artist_image">
-                <h3><a href="artist/turbo-flint/index.html">Eric Lee</a></h3>
-            </div>
+        <div class="flex-item">
+            <img src="image/flower.jpg" class="artist_image">
+            <h3><a href="artist/turbo-flint/index.html">Eric Lee</a></h3>
+        </div>
 
     </div>
     <br>
     <hr>
     <h2 class="top-30">热门作品</h2>
     <div id="app">
-    <article v-for="book in books" :key="book.book_id">
-      <h1>{{ book.book_name }}</h1>
-      <p>发布时间：{{ book.book_time }}<br>作者：{{ book.book_writer }}</p>
+        <article v-for="book in books" :key="book.book_id">
+            <h1>{{ book.book_name }}</h1>
+            <p>发布时间：{{ book.book_time }}<br>作者：{{ book.book_writer }}</p>
+            <hr>
+            <a :href="`books/${book.book_link}/read/?id=${book.id}&chapter=chapter-1`" role="button">立即阅读</a>
 
-
-      <hr>
-      <a :href="`${book.book_link}/?id=${book.book_id}&chapter=chapter-1`" role="button">立即阅读</a>
-      <a :href="`${book.download_link}`" role="button" class="outline">下载阅读</a>
-    </article>
-  </div>
+            <a :href="`${book.download_link}`" role="button" class="outline">下载阅读</a>
+        </article>
+    </div>
     <br>
     <hr>
-    <h2>想要投稿？</h2>
-    <p>别担心！Horizon 已经正在尝试开放创作者功能。未来将支持创作者自行投稿，Horizon 将会有更多优质的作品！</p>
+    <p><a href="open-source.html">开放源代码许可</a>
+        <br>Copyright ©️ 2024 Eric Lee & Turbo Flint.
+    </p>
 
-  <script src="https://cdn.staticfile.net/vue/3.3.4/vue.global.min.js"></script>
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/js/sw.js')
+    .then(registration => {
+        console.log('Service Worker 注册成功:', registration);
+      })
+    .catch(error => {
+        console.error('Service Worker 注册失败:', error);
+      });
+  }
+</script>
+    <script src="https://cdn.staticfile.net/vue/3.3.4/vue.global.min.js"></script>
     <script src="js/script.js"></script>
 
 </body>

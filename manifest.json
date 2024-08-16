@@ -1,0 +1,23 @@
+{
+  "background_color": "#ffffff",
+  "description": "免费、无广告的阅读平台。无论你在哪，随时随地，都能阅读。支持下载离线阅读，不再受局限，想你所做。",
+  "dir": "auto",
+  "display": "standalone",
+  "name": "里森阅读",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "Horizon",
+  "start_url": "/",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "application/favicon.jpg",
+      "type": "image/jpg"
+    }
+  ],
+  "id": "turboflint-horizon",
+  "lang": "zh",
+  "categories": [
+    "books"
+  ]
+}
